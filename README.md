@@ -1,3 +1,3 @@
-#My solutions for codewars katas.
+# My solutions for codewars katas
 
-> With tests
+<span style="color:grey">*With tests*</span>
