@@ -1,11 +1,21 @@
 {
 	"folders": [
 		{
-			"path": "go"
-		},
-		{
-			"path": "typescript"
+			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"cmath": "cpp"
+		},
+		"[go]": {
+			"editor.defaultFormatter": "golang.go",
+		},
+		"[typescript]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode",
+		},
+		"[cpp]": {
+			"editor.defaultFormatter": "ms-vscode.cpptools",
+		}
+	}
 }
