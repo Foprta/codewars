@@ -3,15 +3,19 @@ pub fn encode(s: String) -> String {
     let mut result = String::new();
 
     let mut shift = 0;
-    loop {
 
-        result.push(s.chars().nth(shift).expect("First"));
+    if s.len() == 0 {
+        return s;
+    };
+
+    loop {
+        result.push(s.chars().nth(shift).unwrap());
 
         if shift >= s.chars().count() - shift - 1 {
             break;
         }
 
-        result.push(s.chars().nth(s.chars().count() - shift - 1).expect("Last"));
+        result.push(s.chars().nth(s.chars().count() - shift - 1).unwrap());
 
         if shift + 1 >= s.chars().count() - shift - 1 {
             break;
@@ -24,9 +28,18 @@ pub fn encode(s: String) -> String {
 }
 
 pub fn decode(s: String) -> String {
-    let mut result: Vec<char> = Vec::with_capacity(s.len());
+    let mut left = String::new();
+    let mut right = String::new();
 
-    result.join("")
+    s.chars().enumerate().for_each(|(idx, ch)| {
+        if idx % 2 == 0 {
+            left.push(ch);
+        } else {
+            right.insert(0, ch)
+        }
+    });
+
+    left + &right
 }
 
 #[cfg(test)]
@@ -47,6 +60,8 @@ mod tests {
             "Y.oaut ahka vsei hcth oesteanl stnoa rt".to_string(),
             encode("You have chosen to translate this kata.".to_string())
         );
+        assert_eq!(" ".to_string(), encode(" ".to_string()));
+        assert_eq!("".to_string(), encode("".to_string()));
     }
 
     #[test]
@@ -62,5 +77,7 @@ mod tests {
             "You have chosen to translate this kata.".to_string(),
             decode("Y.oaut ahka vsei hcth oesteanl stnoa rt".to_string())
         );
+        assert_eq!(" ".to_string(), decode(" ".to_string()));
+        assert_eq!("".to_string(), decode("".to_string()));
     }
 }
